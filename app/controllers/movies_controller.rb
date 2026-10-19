@@ -3,7 +3,25 @@ class MoviesController < ApplicationController
 
   # GET /movies or /movies.json
   def index
-    @movies = Movie.all
+    allowed_columns = %w[title rating release_date]
+    allowed_directions = %w[asc desc]
+
+    requested_sort = params[:sort].presence || session[:sort]
+    requested_direction = params[:direction].presence || session[:direction]
+
+    @sort = allowed_columns.include?(requested_sort) ? requested_sort : "title"
+
+    @direction =
+      if allowed_directions.include?(requested_direction)
+        requested_direction
+      else
+        "asc"
+      end
+
+    session[:sort] = @sort
+    session[:direction] = @direction
+
+    @movies = Movie.order(@sort => @direction)
   end
 
   # GET /movies/1 or /movies/1.json
@@ -25,7 +43,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.save
-        format.html { redirect_to @movie, notice: "Movie was successfully created." }
+        format.html { redirect_to movies_path, notice: "Movie was successfully created." }
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new, status: :unprocessable_content }
@@ -38,7 +56,7 @@ class MoviesController < ApplicationController
   def update
     respond_to do |format|
       if @movie.update(movie_params)
-        format.html { redirect_to @movie, notice: "Movie was successfully updated.", status: :see_other }
+        format.html { redirect_to movies_path, notice: "Movie was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @movie }
       else
         format.html { render :edit, status: :unprocessable_content }
