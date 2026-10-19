@@ -2,7 +2,9 @@
 
 RottenPotatoes is a Rails application for managing a movie collection. Users can create, view, edit, and delete movies and sort the collection by title, rating, or release date.
 
+## Deployed application
 
+[View RottenPotatoes on Render](https://rottenpotatoes-t6nf.onrender.com/movies)
 
 ## Requirements
 
