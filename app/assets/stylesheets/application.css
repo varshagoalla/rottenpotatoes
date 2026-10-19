@@ -1,10 +1,257 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+:root {
+  --background: #f7f4ee;
+  --surface: #ffffff;
+  --text: #292722;
+  --muted: #706b62;
+  --border: #ddd7cc;
+  --primary: #a32638;
+  --primary-dark: #7d1928;
+  --ascending: #d9eee0;
+  --descending: #f6ddd4;
+  --danger: #b42333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+.container {
+  width: min(1050px, calc(100% - 2rem));
+  margin: 3rem auto;
+}
+
+.narrow {
+  max-width: 720px;
+}
+
+.page-header,
+.movie-heading,
+.button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+h2 {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+}
+
+p {
+  color: var(--muted);
+}
+
+.table-container,
+.card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 10px 25px rgba(40, 35, 30, 0.08);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.card {
+  padding: 2rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+th {
+  background: #eee9df;
+}
+
+th a {
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+}
+
+th.sorted.asc {
+  background: var(--ascending);
+}
+
+th.sorted.desc {
+  background: var(--descending);
+}
+
+tbody tr:hover {
+  background: #faf8f3;
+}
+
+tfoot td {
+  border-bottom: 0;
+  background: #f2eee6;
+  color: var(--muted);
+}
+
+.movie-title {
+  font-weight: bold;
+}
+
+.rating {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: #ede3c5;
+  font-weight: bold;
+}
+
+.actions {
+  white-space: nowrap;
+}
+
+.actions a {
+  margin-right: 0.75rem;
+  color: var(--primary);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.movie-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field label {
+  font-weight: bold;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #aaa398;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--primary);
+  outline: 3px solid rgba(163, 38, 56, 0.15);
+}
+
+.button-row {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.button-row form {
+  margin: 0;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 6px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: var(--primary-dark);
+}
+
+.button.secondary {
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--text);
+}
+
+.button.danger {
+  background: var(--danger);
+}
+
+.notice {
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #368250;
+  background: #e0f2e6;
+  color: #245b37;
+}
+
+.errors {
+  padding: 1rem;
+  border-left: 4px solid var(--danger);
+  background: #fde7e9;
+  color: #761a27;
+}
+
+@media (max-width: 650px) {
+  .page-header,
+  .movie-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  th,
+  td {
+    padding: 0.7rem;
+  }
+}
+
+
+
+th.sorted {
+  border-bottom: 3px solid currentColor;
+}
+
+table thead th.sorted.asc {
+  background-color: #87d6a0;
+  color: #123d20;
+  border-bottom: 4px solid #217a3d;
+}
+
+table thead th.sorted.desc {
+  background-color: #f2a47f;
+  color: #52200d;
+  border-bottom: 4px solid #b64c20;
+}

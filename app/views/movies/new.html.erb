@@ -1,11 +1,12 @@
-<% content_for :title, "New movie" %>
+<main class="container narrow">
+  <header class="page-header">
+    <div>
+      <h1>Add a Movie</h1>
+      <p>Enter the movie’s information below.</p>
+    </div>
+  </header>
 
-<h1>New movie</h1>
-
-<%= render "form", movie: @movie %>
-
-<br>
-
-<div>
-  <%= link_to "Back to movies", movies_path %>
-</div>
+  <section class="card">
+    <%= render "form", movie: @movie %>
+  </section>
+</main>

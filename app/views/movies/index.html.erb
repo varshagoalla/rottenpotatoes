@@ -1,16 +1,58 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Movies" %>
 
-<h1>Movies</h1>
-
-<div id="movies">
-  <% @movies.each do |movie| %>
-    <%= render movie %>
-    <p>
-      <%= link_to "Show this movie", movie %>
-    </p>
+<main class="container">
+  <% if notice.present? %>
+    <p class="notice"><%= notice %></p>
   <% end %>
-</div>
 
-<%= link_to "New movie", new_movie_path %>
+  <header class="page-header">
+    <div>
+      <h1>RottenPotatoes</h1>
+      <p>Click a column heading to sort the collection.</p>
+    </div>
+
+    <%= link_to "Add Movie", new_movie_path, class: "button" %>
+  </header>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <%= sortable_header("Title", "title") %>
+          <%= sortable_header("Rating", "rating") %>
+          <%= sortable_header("Release Date", "release_date") %>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @movies.each do |movie| %>
+          <tr>
+            <td class="movie-title"><%= movie.title %></td>
+
+            <td>
+              <span class="rating"><%= movie.rating %></span>
+            </td>
+
+            <td>
+              <%= movie.release_date&.strftime("%b %d, %Y") || "Unknown" %>
+            </td>
+
+            <td class="actions">
+              <%= link_to "View", movie_path(movie) %>
+              <%= link_to "Edit", edit_movie_path(movie) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <td colspan="4">
+            <%= pluralize(@movies.count, "movie") %> in the collection
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</main>
